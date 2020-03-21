@@ -1,25 +1,28 @@
+
 <a align="center"><img src="https://image.ibb.co/gPs5Se/Multi_World.png"></a>
 
 <p align="center">
 	<a href="https://poggit.pmmp.io/p/MultiWorld">
-		<img src="https://poggit.pmmp.io/shield.state/MultiWorld">
+		<img src="https://poggit.pmmp.io/shield.state/MultiWorld?style=flat-square">
 	</a>
 	<a href="https://poggit.pmmp.io/p/MultiWorld">
-		<img src="https://poggit.pmmp.io/shield.api/MultiWorld">
+		<img src="https://poggit.pmmp.io/shield.api/MultiWorld?style=flat-square">
 	</a> 
 	<a href="https://poggit.pmmp.io/p/MultiWorld">
-		<img src="https://poggit.pmmp.io/shield.dl.total/MultiWorld">
+		<img src="https://poggit.pmmp.io/shield.dl.total/MultiWorld?style=flat-square">
 	</a> 
 	<a href="https://poggit.pmmp.io/p/MultiWorld">
-		<img src="https://poggit.pmmp.io/shield.dl/MultiWorld">
+		<img src="https://poggit.pmmp.io/shield.dl/MultiWorld?style=flat-square">
 	</a> 
 	<a href="https://poggit.pmmp.io/ci/CzechPMDevs/MultiWorld/MultiWorld">
-		<img src="https://poggit.pmmp.io/ci.shield/CzechPMDevs/MultiWorld/MultiWorld">
+		<img src="https://poggit.pmmp.io/ci.shield/CzechPMDevs/MultiWorld/MultiWorld?style=flat-square">
 	</a>
 <br><br>
     ✔️ Simple world management commands
     <br>
     ✔️New generators (Ender, Nether, Void, SkyBlock)
+    <br>
+    ✔️Custom world generator
     <br>
     ✔️ Fast, without lags
     <br>
@@ -34,26 +37,20 @@
 </p>
 
 
-## 👍 1.5 Update:
+## 👍 1.5.2 Update:
 
-> - Plugin cleanup
-> - New **Nether** generator, old renamed to `nether_old`
-> - New Multi language system
-> - New API for plugin developers
-> - New Config Updater
-> - Implemented some game rules
-> - Plugin now supports only 3.0.0+ api versions
-
-> - Bug fixes:
-	> 	- Fixed `/mw tp` command (now can be used from console)
-	>	- Fixed #15 (unloaded level can be removed)
+> - Bug fixes
+> - New biomes in Custom world generator
+> - Custom generator added to Form world manager
 
 
 ## ⬇️ Downloads:
 
 | Version | Phar Download | Zip Download | API | Stable | Pre release |
 | --- | --- | --- | --- | --- | --- |
-| 1.5.0 | Waiting for approve | [GitHub](https://github.com/CzechPMDevs/MultiWorld/archive/1.5.0) | 3.0.0, 3.1.0 | ✔️ | ❌
+| 1.5.2 | [Poggit releases](https://poggit.pmmp.io/p/MultiWorld/1.5.2) | [GitHub](https://github.com/CzechPMDevs/MultiWorld/archive/5ab655846002e4ce9cfd9768b519c2da6e84a8d4.zip) | 3.x.x | ✔️ | ❌ |
+| 1.5.1 | [Poggit releases](https://poggit.pmmp.io/p/MultiWorld/1.5.2) | [GitHub](https://github.com/CzechPMDevs/MultiWorld/archive/7070892a1b272eab0152f188670150228fc57959.zip) | 3.x.x | ✔️ | ❌ |
+| 1.5.0 | [Poggit releases](https://poggit.pmmp.io/p/MultiWorld/1.5.0) | [GitHub](https://github.com/CzechPMDevs/MultiWorld/archive/1.5.0) | 3.0.0, 3.1.0 | ✔️ | ❌ |
 | 1.5.0-beta2 | [GitHub](https://github.com/CzechPMDevs/MultiWorld/releases/download/1.5.0-beta1/MultiWorld_v1.5.0-beta1.phar) | [GitHub](https://github.com/CzechPMDevs/MultiWorld/archive/1.5.0-beta1.zip) | 3.0.0, 3.1.0 | ✔️ |✔️ |
 | 1.5.0-beta1 | [GitHub](https://github.com/CzechPMDevs/MultiWorld/releases/download/1.5.0-beta1/MultiWorld_v1.5.0-beta1.phar) | [GitHub](https://github.com/CzechPMDevs/MultiWorld/archive/1.5.0-beta1.zip) | 3.0.0, 3.1.0 | ❌ |✔️ |
 | 1.4.3 | [Poggit Releases](https://poggit.pmmp.io/r/34104/MultiWorld.phar) | [GitHub](https://github.com/CzechPMDevs/MultiWorld/archive/ef6f73109c0438ab2a5c404ccdd288e2d73b5002.zip) | 3.0.0-ALPHA7 - 3.0.0 | ✔️ | ❌ |
@@ -75,6 +72,7 @@
 
 <br>
 
+
 ## 📁 Supported software:
 
 **This plugin works only on PocketMine-MP.** You can download [MultiWorld by Creeperface](https://github.com/Creeperface01/MultiWorld) for Nukkit or [MultiWorld by ferrybig](https://dev.bukkit.org/projects/multiworld-v-2-0) for Bukkit. **PMMP Spoons are NOT supported.**
@@ -85,6 +83,7 @@
 1) [Download](https://poggit.pmmp.io/p/MultiWorld) latest stable released version from poggit
 2) Move dowloaded file to your server **/plugins/** folder
 3) Restart the server
+
 
 ## 🌎 World management commands:
 
@@ -107,6 +106,9 @@
 | **/mw load** | **Loads level** <br><br> Aliases: `/mw ld` <br> Usage: `/mw load <level>` |
 | **/mw unload** | **Unloads level** <br><br> Aliases: `/mw unld` <br> Usage: `/mw unload <level>` |
 | **/mw gamerule** | **Manage with level game rules** <br><br>Aliases: `/gamerule`, `/mw gr`, `/mw gamer`, `/mw grule` <br> Usage: `/gamerule <list|gamerule> [bool|false]` <br><br> Level game rules can be changed in server settings, implemented game rules: `doDaylightCycle`, `doMobLoot`, `doTileDrops`, `keepInventory`, `naturalRegeneration`, `pvp`, `showcoordinates` and `tntexplodes` more informations can be found on [WorldGameRulesAPI documentation]() |
+| **/mw rename** | **Renames level** <br><br>Aliases: `/mw rnm`, `/mw re` <br> Usage: `/mw rename <levelName> <newName>` <br><br> This command changes name of the folder and of nbt too. |
+| **/mw manage** | **Opens world form manager** <br><br>Aliases: `/mw mng`, `/mw mg` <br> Usage: `/mw manage` <br><br> The form manager just dispatches command as a player, so player needs also permission for the command. |
+
 
 ## 📃  Premissions:
 
@@ -127,6 +129,35 @@
 | mw.cmd.load | `/mw load` | ✔️ |
 | mw.cmd.unload | `/mw unload` | ✔️ |
 | mw.cmd.gamerule | `/mw gamerule` | ✔️ |
+| mw.cmd.rename | `/mw rename` | ✔️ |
+| mw.cmd.manage | `/mw manage` | ✔️ |
+
+
+## ⛰️ Generators
+
+### Custom World Generator:
+
+<img src="https://i.ibb.co/vxyLDT6/image.png">
+<img src="https://i.ibb.co/sW1Y2ch/image.png">
+<img src="https://i.ibb.co/2PSm2C9/image.png">
+<img src="https://i.ibb.co/0Yjk82L/image.png">
+<img src="https://i.ibb.co/MGQkkyc/image.png">
+<img src="https://i.ibb.co/0tMc8Cs/image.png">
+<img src="https://i.ibb.co/p1w1tCV/image.png">
+<img src="https://i.ibb.co/b1qJ6Ys/image.png">
+<img src="https://i.ibb.co/rtY37Gj/image.png">
+
+###  Nether World Generator:
+<img src="https://i.ibb.co/1KXb8FX/image.png">
+<img src="https://i.ibb.co/xm05rDw/image.png">
+
+### End World Generator:
+<img src="https://i.ibb.co/G7rbRHp/image.png">
+<img src="https://i.ibb.co/KsPPjrJ/image.png">
+
+### SkyBlock Generator:
+<img src="https://i.ibb.co/DDVM4zM/image.png">
+
 
 ##  🗺️ World Management API
 
@@ -155,7 +186,9 @@
 }
 ```
 
+
 ## 🖊️  World Game Rules API
+
 
 - World game rules api was added in MultiWorld v1.5.0, you can download stubs on [release page](), there are all WorldGameRulesAPI methods
 
@@ -226,6 +259,7 @@ class XYZPlugin extends PluginBase implements Listener {
 }  
 ```
 
+
 ## 🌐Add your language!
 
 - Do you want to help with the development of MultiWorld? Add your native language!
@@ -235,11 +269,15 @@ class XYZPlugin extends PluginBase implements Listener {
 3) Transalte e.g. language from English file https://github.com/CzechPMDevs/MultiWorld/blob/PocketMine-MP/MultiWorld/resources/languages/en_US.yml
 4) Click Propose new file
 
+
 ## 💰 Credits
 
 - Icon made by [Freepik](http://www.freepik.com/ "Freepik") from [www.flaticon.com](https://www.flaticon.com/ "Flaticon") is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/ "Creative Commons BY 3.0")
 - Japanese translation by [fuyutsuki](https://github.com/fuyutsuki)
 - Russian translation by [SteinsSquad (themestl)](https://github.com/themestl)
+- Indonesian translation by [WooWBoom](https://github.com/GitWoow)
+- German translation by [SchdowNVIDIA](https://github.com/SchdowNVIDIA) and [Tobikisss](https://github.com/Tobikisss)
+- Chinese translation by [abc1460132901](https://github.com/abc1460132901)
 
 ##  💡 License
 

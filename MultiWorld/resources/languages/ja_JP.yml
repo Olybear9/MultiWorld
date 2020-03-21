@@ -16,10 +16,13 @@ help-5: '§2/mw update §fワールドのロビー、スポーン、デフォル
 
 help-6: '§2/mw delete §fワールドを削除'
 help-7: '§2/mw info §fワールドの情報を表示'
-help-8: '§2/mw gamerule §fManage with level game rules' # needs translate
+help-8: '§2/mw gamerule §fワールドのゲームルールを変更'
+help-9: '§2/mw manage §fワールド管理用のフォームを表示'
+help-10: '§2/mw rename §fワールド名を変更'
 
 # Create Command:
 create-usage: '§c使用方法: §7/mw create <ワールド名> [シード値] [ジェネレータ名]'
+create-exists: '§cワールド {%0} は既に存在します!'
 create-gennotexists: '§c%1 という名前のジェネレータは存在しません'
 create-generating: '§aワールド {%0} を生成中です'
 create-done: 'ワールド {%0} はシード値 {%1} , ジェネレータ名 {%2} によって生成されました'
@@ -27,7 +30,7 @@ create-done: 'ワールド {%0} はシード値 {%1} , ジェネレータ名 {%2
 # Teleport Command:
 teleport-usage: '§c使用方法: §7/mw teleport <ワールド名> [プレイヤー名]'
 teleport-levelnotexists: '§c指定されたワールドは存在しません! ワールドを生成するには /mw create を使用して下さい'
-teleport-load: 'ワールド {%0} を読込中です'
+teleport-load: 'ワールド {%0} を読み込み中です'
 teleport-done-1: '§aワールド {%0} にテレポートしました'
 teleport-done-2: '§aプレイヤー名 {%1} をワールド {%0} にテレポートしました'
 teleport-playernotexists: '§c指定されたプレイヤーは存在しません!'
@@ -43,13 +46,13 @@ load-done: '§aワールドを読み込みました'
 
 # Unload Command:
 unload-usage: '§c使用方法: §7/mw unload <ワールド名>'
-unload-levelnotexists: '§cワールド %1 は存在しません!'
+unload-levelnotexists: '§cワールド {%0} は存在しません!'
 unload-unloaded: '§c読み込まれていないワールドを読み込み解除することはできません!'
 unload-done: '§aワールドの読み込みを解除しました'
 
 # Delete Command:
 delete-usage: '§c使用方法: §7/mw delete <ワールド名>'
-delete-levelnotexists: '§cワールド %1 は存在しません!'
+delete-levelnotexists: '§cワールド {%0} は存在しません!'
 delete-done: '§aワールドを削除しました ({%0} つのファイルを削除しました)'
 
 # Update Command:
@@ -62,6 +65,7 @@ update-default-done: '§aワールド {%0} を標準のワールドとして設�
 update-notsupported: '§cこのコマンドはコンソールでの実行に対応していません'
 
 # Info Command:
+info-levelnotexists: '§cワールド {%0} は存在しません!'
 info: '§a--- {%0} ---'
 info-name: '§7ワールド名: {%0}'
 info-folderName: '§7フォルダ名: {%0}'
@@ -71,9 +75,18 @@ info-seed: '§7シード値: {%0}'
 info-time: '§7ワールド内時間: {%0}'
 
 # Gamerule Command:
-gamerule.usage: '§cUsage: §7/mw gamerule <list|gamerule> [true|false] [level]' # needs translate
-gamerule.list: '§aEditable GameRules: {%0}' # needs translate
-gamerule.levelnotfound: '§cLevel {%0} not found.' # needs translate
-gamerule.notexists: '§cGame rule {%0} not exists.' # needs translate
-gamerule.done: '§aGame rule {%0} in level {%1} was changed to {%2}.' # needs translate
+gamerule-usage: '§c使用方法: §7/mw gamerule <list|gamerule> [true|false] [ワールド名]'
+gamerule-list: '§a変更可能なゲームルール: {%0}'
+gamerule-levelnotfound: '§cワールド {%0} は存在しません'
+gamerule-notexists: '§cゲームルール {%0} は存在しません'
+gamerule-done: '§aワールド {%1} のゲームルール {%0} を {%2} に変更しました'
+
+# Rename Command
+rename-usage: '§c使用方法: §7/mw rename <元のワールド名> <変更先ワールド名>'
+rename-exists: '§c{%0} という名前のワールドは既に存在します'
+rename-levelnotfound: '§cワールド {%0} は存在しません!'
+rename-done: '§aワールド名 {%0} を {%1} に変更しました'
+
+# Forms
+forms-invalid: '§cフォームに入力した値が異常です'
 ...
