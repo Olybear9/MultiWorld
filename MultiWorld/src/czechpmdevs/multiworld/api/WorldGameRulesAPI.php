@@ -1,8 +1,9 @@
+@@ -1,228 +0,0 @@
 <?php
 
 /**
  * MultiWorld - PocketMine plugin that manages worlds.
- * Copyright (C) 2018 - 2020  CzechPMDevs
+ * Copyright (C) 2018  CzechPMDevs
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,9 +21,10 @@
 
 declare(strict_types=1);
 
-namespace czechpmdevs\multiworld\api;
+namespace multiworld\api;
 
 use pocketmine\level\format\io\BaseLevelProvider;
+use pocketmine\level\format\io\data\BaseNbtLevelData;
 use pocketmine\level\Level;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\network\mcpe\protocol\GameRulesChangedPacket;
@@ -31,7 +33,7 @@ use pocketmine\Player;
 
 /**
  * Class WorldGameRulesAPI
- * @package czechpmdevs\multiworld\api
+ * @package multiworld\api
  */
 class WorldGameRulesAPI {
 
@@ -42,24 +44,18 @@ class WorldGameRulesAPI {
      * @return array
      */
     public static function getLevelGameRules(Level $level): array {
-        $levelProvider = $level->getProvider();
-        if(!$levelProvider instanceof BaseLevelProvider) {
+        $levelData = $level->getProvider()->getLevelData();
+        if(!$levelData instanceof BaseNbtLevelData) {
             return self::getDefaultGameRules();
         }
 
-        $compound = $levelProvider->getLevelData()->getCompoundTag("GameRules");
+        $compound = $levelData->getCompoundTag()->getCompoundTag("GameRules");
 
         if(!$compound instanceof CompoundTag) {
-            $levelProvider->getLevelData()->setTag(new CompoundTag("GameRules", []));
-            $compound = $levelProvider->getLevelData()->getCompoundTag("GameRules");
+            $levelData->getCompoundTag()->setTag(new CompoundTag("GameRules", []));
+            $rules = $levelData->getCompoundTag()->getCompoundTag("GameRules");
             foreach (self::getDefaultGameRules() as $rule => [$type, $value]) {
-                $compound->setString($rule, self::getStringFromValue($value));
-            }
-        }
-
-        if($compound->count() == 0) { // pmmp now generates worlds with empty gamerules :O
-            foreach (self::getDefaultGameRules() as $rule => [$type, $value]) {
-                $compound->setString($rule, self::getStringFromValue($value));
+                $rules->offsetSet($rule, $value);
             }
         }
 
@@ -82,18 +78,16 @@ class WorldGameRulesAPI {
      * @return bool
      */
     public static function setLevelGameRules(Level $level, array $gameRules): bool {
-        $levelProvider = $level->getProvider();
-        if(!$levelProvider instanceof BaseLevelProvider) {
+        $levelData = $level->getProvider()->getLevelData();
+        if(!$levelData instanceof BaseNbtLevelData || !$levelData->getCompoundTag()->getCompoundTag("GameRules") instanceof CompoundTag) {
             return false;
         }
 
-        $compound = $levelProvider->getLevelData()->getCompoundTag("GameRules");
-
         foreach ($gameRules as $index => [$type, $value]) {
-            $compound->setString($index, self::getStringFromValue($value));
+            $levelData->getCompoundTag()->setString($index, self::getStringFromValue($value));
         }
 
-        $levelProvider->saveLevelData();
+        $levelData->save();
         self::handleGameRuleChange($level, $gameRules);
         return true;
     }
@@ -106,15 +100,15 @@ class WorldGameRulesAPI {
      * @return bool
      */
     public static function updateLevelGameRule(Level $level, string $gameRule, bool $value): bool {
-        $levelProvider = $level->getProvider();
-        if(!$levelProvider instanceof BaseLevelProvider) {
+        $levelData = $level->getProvider()->getLevelData();
+        if(!$levelData instanceof BaseNbtLevelData) {
             return false;
         }
 
-        $compound = $levelProvider->getLevelData()->getCompoundTag("GameRules");
+        $compound = $levelData->getCompoundTag()->getCompoundTag("GameRules");
         $compound->setString($gameRule, self::getStringFromValue($value));
 
-        $levelProvider->saveLevelData();
+        $levelData->save();
         self::reloadGameRules($level);
         self::handleGameRuleChange($level, [$gameRule => [1, $value]]);
         return true;
@@ -195,7 +189,7 @@ class WorldGameRulesAPI {
                 case "doDaylightCycle":
                     $level->setTime(0);
                     $level->stopTime = !$value;
-                    break;
+                    continue;
             }
         }
     }

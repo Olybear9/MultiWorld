@@ -53,7 +53,8 @@ use pocketmine\scheduler\Task;
  * Class EventListener
  * @package multiworld
  */
-class EventListener implements Listener {
+class EventListener implements Listener
+{
 
     /** @var MultiWorld $plugin */
     public $plugin;
@@ -73,7 +74,8 @@ class EventListener implements Listener {
      * @param MultiWorld $plugin
      * @param MultiWorldCommand $mwCommand
      */
-    public function __construct(MultiWorld $plugin, MultiWorldCommand $mwCommand) {
+    public function __construct(MultiWorld $plugin, MultiWorldCommand $mwCommand)
+    {
         $this->plugin = $plugin;
         $this->mwCommand = $mwCommand;
     }
@@ -81,27 +83,30 @@ class EventListener implements Listener {
     /**
      * @param PlayerJoinEvent $event
      */
-    public function onJoin(PlayerJoinEvent $event) {
+    public function onJoin(PlayerJoinEvent $event)
+    {
         WorldGameRulesAPI::updateGameRules($event->getPlayer());
     }
 
     /**
      * @param LevelLoadEvent $event
      */
-    public function onLevelLoad(LevelLoadEvent $event) {
+    public function onLevelLoad(LevelLoadEvent $event)
+    {
         WorldGameRulesAPI::handleGameRuleChange($event->getLevel(), WorldGameRulesAPI::getLevelGameRules($event->getLevel()));
     }
 
     /**
      * @param EntityLevelChangeEvent $event
      */
-    public function onLevelChange(EntityLevelChangeEvent $event) {
+    public function onLevelChange(EntityLevelChangeEvent $event)
+    {
         $entity = $event->getEntity();
-        if($entity instanceof Player) {
+        if ($entity instanceof Player) {
             WorldGameRulesAPI::updateGameRules($entity, $event->getTarget());
 
-            $originGenerator = $event->getOrigin()->getProvider()->getGenerator();
-            $targetGenerator = $event->getTarget()->getProvider()->getGenerator();
+            $originGenerator = $event->getOrigin()->getProvider()->getLevelData()->getGenerator();
+            $targetGenerator = $event->getTarget()->getProvider()->getLevelData()->getGenerator();
 
             $getDimension = function ($generator): int {
                 switch ($generator) {
@@ -118,7 +123,7 @@ class EventListener implements Listener {
                 }
             };
 
-            if($getDimension($originGenerator) == $getDimension($targetGenerator)) return;
+            if ($getDimension($originGenerator) == $getDimension($targetGenerator)) return;
 
             $pk = new ChangeDimensionPacket();
             $pk->dimension = $getDimension($targetGenerator);
